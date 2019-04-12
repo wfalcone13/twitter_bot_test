@@ -54,13 +54,20 @@ T.get('users/search', params, function(err,data,response){
         data.forEach(tw =>{
           let id = {id: tw.id_str}
           console.log(id)
-          T.post('favorites/create', id, function(err, response){
-            if(err){
+          T.post(`statuses/retweet/${tw.id_str}`, id, function (err, response) {
+            if (err) {
               console.log(err[0].message);
             } else {
-              console.log('favd')
+              console.log('retwet')
             }
-          })
+            })
+          // T.post('favorites/create', id, function(err, response){
+          //   if(err){
+          //     console.log(err[0].message);
+          //   } else {
+          //     console.log('favd')
+          //   }
+          // })
         })
       }
     } )
