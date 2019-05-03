@@ -9,12 +9,8 @@ var params = {
   
 }
 
-
-
 ///get Dt's tweets
 // favorite DT's tweets
-
-
 
 
 T.get('users/search', params, function(err,data,response){
@@ -26,23 +22,23 @@ T.get('users/search', params, function(err,data,response){
 
     T.get('statuses/user_timeline', id, function(err, data, response){
       if(!err){
-        let tw_id = data[0].id
+        let id = {id: data[0].id_str}
         let tw_str = data[0].id_str
-        console.log(tw_id.id)
+        console.log(id)
         console.log(tw_str)
         // console.log(data[0])
         
       
-        // T.post(`statuses/retweet/${tw_str}`, tw_id, function (err, response) {
-        //     if (err) {
-        //       console.log(err[0].message);
-        //     } else {
-        //       console.log('retwet')
-        //     }
+        T.post(`statuses/retweet/${tw_str}`, id, function (err, response) {
+            if (err) {
+              console.log(err[0].message);
+            } else {
+              console.log('retwet')
+            }
 
-        //   })
+          })
 
-          T.post('favorites/create', tw_id, function(err, response){
+        T.post('favorites/create', id, function(err, response){
             if(err){
               console.log(err[0].message);
             } else {
